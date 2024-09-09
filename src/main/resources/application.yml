@@ -1,0 +1,16 @@
+server:
+  port: 8050
+  error:
+    include-stacktrace: never
+    include-message: always
+spring:
+  application:
+    name: auth-server
+  profiles:
+    active: dev
+jwt:
+  access-token:
+    expiration-ms: 120000 # 2? = 120,000ms
+  refresh-token:
+    expiration-ms: 86400000 # 24?? = 86,400,000ms
+  secret: ${JWT_SECRET}
