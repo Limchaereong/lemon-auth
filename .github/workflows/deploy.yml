@@ -1,0 +1,44 @@
+name: Configure Secrets
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  configure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: 'zulu'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Configure environment variables
+        run: |
+          echo "DB_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+          echo "EUREKA_SERVER_HOSTNAME=${{ secrets.EUREKA_SERVER_HOSTNAME }}" >> $GITHUB_ENV
+          echo "EUREKA_SERVER_PORT=${{ secrets.EUREKA_SERVER_PORT }}" >> $GITHUB_ENV
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          DB_USERNAME: ${{ secrets.DB_USERNAME }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          EUREKA_SERVER_HOSTNAME: ${{ secrets.EUREKA_SERVER_HOSTNAME }}
+          EUREKA_SERVER_PORT: ${{ secrets.EUREKA_SERVER_PORT }}
+
+      - name: Print environment variables
+        run: |
+          echo "DB_URL=$DB_URL"
+          echo "DB_USERNAME=$DB_USERNAME"
+          echo "DB_PASSWORD=$DB_PASSWORD"
+          echo "EUREKA_SERVER_HOSTNAME=$EUREKA_SERVER_HOSTNAME"
+          echo "EUREKA_SERVER_PORT=$EUREKA_SERVER_PORT"
