@@ -23,22 +23,16 @@ jobs:
 
       - name: Configure environment variables
         run: |
-          echo "DB_URL=${{ secrets.DB_URL }}" >> $GITHUB_ENV
-          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
           echo "EUREKA_SERVER_HOSTNAME=${{ secrets.EUREKA_SERVER_HOSTNAME }}" >> $GITHUB_ENV
           echo "EUREKA_SERVER_PORT=${{ secrets.EUREKA_SERVER_PORT }}" >> $GITHUB_ENV
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET }}" >> $GITHUB_ENV
         env:
-          DB_URL: ${{ secrets.DB_URL }}
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           EUREKA_SERVER_HOSTNAME: ${{ secrets.EUREKA_SERVER_HOSTNAME }}
           EUREKA_SERVER_PORT: ${{ secrets.EUREKA_SERVER_PORT }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
       - name: Print environment variables
         run: |
-          echo "DB_URL=$DB_URL"
-          echo "DB_USERNAME=$DB_USERNAME"
-          echo "DB_PASSWORD=$DB_PASSWORD"
           echo "EUREKA_SERVER_HOSTNAME=$EUREKA_SERVER_HOSTNAME"
           echo "EUREKA_SERVER_PORT=$EUREKA_SERVER_PORT"
+          echo "JWT_SECRET=JWT_SECRET"
