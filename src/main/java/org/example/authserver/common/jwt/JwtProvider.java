@@ -1,4 +1,4 @@
-package common.jwt;
+package org.example.authserver.common.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
