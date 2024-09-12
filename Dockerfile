@@ -18,3 +18,5 @@ FROM azul/zulu-openjdk:21
 WORKDIR /auth
 COPY --from=build /auth/build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-Duser.timezone=Asia/Seoul", "-jar", "app.jar"]
+
+VOLUME /tmp
