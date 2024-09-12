@@ -7,7 +7,7 @@ import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@TestPropertySource(properties = {"JWT_SECRET=testSecretKeyForJwt"})
+@TestPropertySource(properties = {"JWT_SECRET=testSecretKeyThatIsLongEnoughToBeStrong123"})
 class AuthServerApplicationTests {
 
     @Test

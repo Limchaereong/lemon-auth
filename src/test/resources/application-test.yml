@@ -21,7 +21,7 @@ logging:
     org.springframework: WARN
 
 jwt:
-  secret: testSecretKeyForJwt # 테스트 환경에서 사용할 임시 비밀키
+  secret: testSecretKeyThatIsLongEnoughToBeStrong123 # 테스트 환경에서 사용할 임시 비밀키
   access-token:
     expiration-ms: 120000
   refresh-token:
