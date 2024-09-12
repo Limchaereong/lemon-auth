@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Setup Environment') {
             steps {
-                dir("$env.WORKSPACE}") {
+                dir("${env.WORKSPACE}") {  // 중괄호 제대로 수정
                     script {
                         sh "ls -al"
                         sh "chmod +x ./gradlew"
@@ -39,13 +39,14 @@ pipeline {
             steps {
                 script {
                     sh "docker build -t auth ."
-                    }
+                }
             }
         }
         stage('Up') {
             steps {
                 script {
                     sh "docker run -d --rm --name auth -p 8050:8050 auth"
+                }
             }
         }
     }
