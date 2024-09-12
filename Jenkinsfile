@@ -11,11 +11,9 @@ pipeline {
         }
         stage('Setup Environment') {
             steps {
-                dir("${env.WORKSPACE}") {  // 중괄호 제대로 수정
-                    script {
-                        sh "ls -al"
-                        sh "chmod +x ./gradlew"
-                    }
+                script {
+                    sh "ls -al"
+                    sh "chmod +x ./gradlew"
                 }
             }
         }
