@@ -11,9 +11,11 @@ pipeline {
         }
         stage('Setup Environment') {
             steps {
-                script {
-                    sh "ls -al"
-                    sh "chmod +x ./gradlew"
+                dir("$env.WORKSPACE}") {
+                    script {
+                        sh "ls -al"
+                        sh "chmod +x ./gradlew"
+                    }
                 }
             }
         }
