@@ -21,15 +21,6 @@ pipeline {
                 }
             }
         }
-        // stage('build Jar') {
-        //     steps {
-        //         script {
-        //             sh "chmod +x ./gradlew"
-        //             // Gradle을 사용하여 JAR 파일 빌드
-        //             sh "./gradlew clean bootJar --no-build-cache"
-        //         }
-        //     }
-        // }
         stage('Stop and Remove Container') {
             steps {
                 script {
@@ -60,7 +51,11 @@ pipeline {
             steps {
                 script {
                     // 컨테이너 실행 (포트 매핑 포함)
-                    sh "docker run -d --rm --name ${DOCKER_CONTAINER} -p 8050:8050 ${DOCKER_IMAGE}"
+                    try {
+                        sh "docker run -d --name ${DOCKER_CONTAINER} -p 8050:8050 ${DOCKER_IMAGE}"
+                    } catch(Exception e) {
+                        sh "docker restart ${DOCKER_CONTAINER} || true"
+                    }
                 }
             }
         }
