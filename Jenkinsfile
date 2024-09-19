@@ -24,6 +24,7 @@ pipeline {
         stage('build Jar') {
             steps {
                 script {
+                    sh "chmod +x ./gradlew"
                     // Gradle을 사용하여 JAR 파일 빌드
                     sh "./gradlew clean bootJar --no-build-cache"
                 }
