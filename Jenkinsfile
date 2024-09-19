@@ -12,12 +12,20 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Setup Environment') {
+        // stage('Setup Environment') {
+        //     steps {
+        //         script {
+        //             // 현재 디렉토리 내의 파일을 나열하고 gradlew 파일에 실행 권한을 부여
+        //             sh "ls -al"
+        //             sh "chmod +x ./gradlew"
+        //         }
+        //     }
+        // }
+        stage('build Jar') {
             steps {
                 script {
-                    // 현재 디렉토리 내의 파일을 나열하고 gradlew 파일에 실행 권한을 부여
-                    sh "ls -al"
-                    sh "chmod +x ./gradlew"
+                    // Gradle을 사용하여 JAR 파일 빌드
+                    sh "./gradlew clean bootJar --no-build-cache"
                 }
             }
         }
