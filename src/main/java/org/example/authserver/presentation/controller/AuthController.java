@@ -1,26 +1,30 @@
 package org.example.authserver.presentation.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.authserver.common.jwt.JwtProvider;
+import org.example.authserver.application.service.AuthService;
+import org.example.authserver.presentation.dto.request.RefreshTokenRequestDto;
 import org.example.authserver.presentation.dto.request.TokenRequestDto;
 import org.example.authserver.presentation.dto.response.TokenResponseDto;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final JwtProvider jwtProvider;
+    private final AuthService authService;
 
     @PostMapping("/token")
     public TokenResponseDto generateTokens(@RequestBody TokenRequestDto tokenRequestDto) {
-        String accessToken = jwtProvider.createAccessJwt(tokenRequestDto.userId(), tokenRequestDto.userRole());
-        String refreshToken = jwtProvider.createRefreshJwt();
-
-        return new TokenResponseDto(accessToken, refreshToken);
+        return authService.generateTokens(tokenRequestDto.userId(), tokenRequestDto.userRole());
     }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<TokenResponseDto> refreshAccessToken(@RequestBody RefreshTokenRequestDto refreshTokenRequestDto,
+                                                               ServerHttpResponse response) {
+        return authService.refreshAccessToken(refreshTokenRequestDto.refreshToken(), response);
+    }
+
 }
