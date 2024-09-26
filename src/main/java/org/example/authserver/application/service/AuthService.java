@@ -4,10 +4,7 @@ import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import org.example.authserver.common.jwt.JwtProvider;
 import org.example.authserver.presentation.dto.response.TokenResponseDto;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +19,7 @@ public class AuthService {
         return new TokenResponseDto(accessToken, refreshToken);
     }
 
-    public ResponseEntity<TokenResponseDto> refreshAccessToken(String refreshToken, ServerHttpResponse response) {
+    public ResponseEntity<TokenResponseDto> refreshAccessToken(String refreshToken) {
         if (!jwtProvider.isTokenValid(refreshToken)) {
             return ResponseEntity.status(401).body(null);
         }
@@ -32,15 +29,9 @@ public class AuthService {
         String userRole = claims.get("userRole", String.class);
 
         String newAccessToken = jwtProvider.createAccessJwt(userId, userRole);
-
         String newRefreshToken = jwtProvider.createRefreshJwt();
-        ResponseCookie refreshCookie = ResponseCookie.from("refresh_token", newRefreshToken)
-                .httpOnly(true)
-                .path("/")
-                .maxAge(86400)
-                .build();
-        response.getHeaders().add(HttpHeaders.SET_COOKIE, refreshCookie.toString());
 
+        // 새로 발급된 액세스 토큰과 리프레시 토큰을 응답으로 내려줌
         return ResponseEntity.ok(new TokenResponseDto(newAccessToken, newRefreshToken));
     }
 }
