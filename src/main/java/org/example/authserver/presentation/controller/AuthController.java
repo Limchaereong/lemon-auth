@@ -6,7 +6,6 @@ import org.example.authserver.presentation.dto.request.RefreshTokenRequestDto;
 import org.example.authserver.presentation.dto.request.TokenRequestDto;
 import org.example.authserver.presentation.dto.response.TokenResponseDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -22,9 +21,8 @@ public class AuthController {
     }
 
     @PostMapping("/refresh")
-    public ResponseEntity<TokenResponseDto> refreshAccessToken(@RequestBody RefreshTokenRequestDto refreshTokenRequestDto,
-                                                               ServerHttpResponse response) {
-        return authService.refreshAccessToken(refreshTokenRequestDto.refreshToken(), response);
+    public ResponseEntity<TokenResponseDto> refreshAccessToken(@RequestBody RefreshTokenRequestDto refreshTokenRequestDto) {
+        return authService.refreshAccessToken(refreshTokenRequestDto.refreshToken());
     }
 
 }
