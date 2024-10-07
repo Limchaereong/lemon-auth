@@ -34,11 +34,11 @@ class AuthServiceTest {
         String expectedAccessToken = "access_token";
         String expectedRefreshToken = "refresh_token";
 
-        when(jwtProvider.createAccessJwt(userId, userRole)).thenReturn(expectedAccessToken);
+        when(jwtProvider.createAccessJwt(userId)).thenReturn(expectedAccessToken);
         when(jwtProvider.createRefreshJwt()).thenReturn(expectedRefreshToken);
 
         // Act
-        TokenResponseDto tokenResponseDto = authService.generateTokens(userId, userRole);
+        TokenResponseDto tokenResponseDto = authService.generateTokens(userId);
 
         // Assert
         assertNotNull(tokenResponseDto);
@@ -61,7 +61,7 @@ class AuthServiceTest {
 
         when(jwtProvider.isTokenValid(refreshToken)).thenReturn(true);
         when(jwtProvider.getAllClaimsFromToken(refreshToken)).thenReturn(claims);
-        when(jwtProvider.createAccessJwt(userId, userRole)).thenReturn(newAccessToken);
+        when(jwtProvider.createAccessJwt(userId)).thenReturn(newAccessToken);
         when(jwtProvider.createRefreshJwt()).thenReturn(newRefreshToken);
 
         // Act

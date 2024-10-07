@@ -28,13 +28,12 @@ public class JwtProvider {
         this.secretKey = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createAccessJwt(String userId, String userRole) {
+    public String createAccessJwt(String userId) {
         return Jwts.builder()
                 .setHeaderParam("typ", "ACCESS_TOKEN")
                 .subject(UUID.randomUUID().toString())
                 .issuedAt(Date.from(Instant.now()))
                 .claim("userId", userId)
-                .claim("userRole", userRole)
                 .setExpiration(Date.from(Instant.now().plusMillis(accessTokenExpiration)))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
