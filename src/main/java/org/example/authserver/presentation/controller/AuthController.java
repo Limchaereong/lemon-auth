@@ -17,7 +17,7 @@ public class AuthController {
 
     @PostMapping("/token")
     public TokenResponseDto generateTokens(@RequestBody TokenRequestDto tokenRequestDto) {
-        return authService.generateTokens(tokenRequestDto.userId(), tokenRequestDto.userRole());
+        return authService.generateTokens(tokenRequestDto.userId());
     }
 
     @PostMapping("/refresh")

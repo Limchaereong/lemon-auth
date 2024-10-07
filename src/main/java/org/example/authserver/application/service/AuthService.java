@@ -13,8 +13,8 @@ public class AuthService {
 
     private final JwtProvider jwtProvider;
 
-    public TokenResponseDto generateTokens(String userId, String userRole) {
-        String accessToken = jwtProvider.createAccessJwt(userId, userRole);
+    public TokenResponseDto generateTokens(String userId) {
+        String accessToken = jwtProvider.createAccessJwt(userId);
         String refreshToken = jwtProvider.createRefreshJwt();
         return new TokenResponseDto(accessToken, refreshToken);
     }
@@ -26,9 +26,8 @@ public class AuthService {
 
         Claims claims = jwtProvider.getAllClaimsFromToken(refreshToken);
         String userId = claims.get("userId", String.class);
-        String userRole = claims.get("userRole", String.class);
 
-        String newAccessToken = jwtProvider.createAccessJwt(userId, userRole);
+        String newAccessToken = jwtProvider.createAccessJwt(userId);
         String newRefreshToken = jwtProvider.createRefreshJwt();
 
         // 새로 발급된 액세스 토큰과 리프레시 토큰을 응답으로 내려줌

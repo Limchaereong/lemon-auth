@@ -25,16 +25,14 @@ class JwtProviderTest {
     @Test
     void testCreateAccessJwt() {
         String userId = "12345";
-        String userRole = "USER";
 
-        String accessToken = jwtProvider.createAccessJwt(userId, userRole);
+        String accessToken = jwtProvider.createAccessJwt(userId);
         assertNotNull(accessToken);
         System.out.println("Access Token: " + accessToken);
 
         // 액세스 토큰에서 클레임을 추출하여 검증
         Claims claims = jwtProvider.getAllClaimsFromToken(accessToken);
         assertEquals(userId, claims.get("userId"));
-        assertEquals(userRole, claims.get("userRole"));
     }
 
     @Test
@@ -52,7 +50,7 @@ class JwtProviderTest {
         String userId = "12345";
         String userRole = "USER";
 
-        String accessToken = jwtProvider.createAccessJwt(userId, userRole);
+        String accessToken = jwtProvider.createAccessJwt(userId);
         assertNotNull(accessToken);
 
         // 유효한 토큰의 유효성 확인
@@ -76,7 +74,7 @@ class JwtProviderTest {
 
         // 매우 짧은 유효 기간을 가진 토큰 생성
         jwtProvider.accessTokenExpiration = 1000; // 1초
-        String accessToken = jwtProvider.createAccessJwt(userId, userRole);
+        String accessToken = jwtProvider.createAccessJwt(userId);
 
         // 바로 생성 직후에는 유효
         assertTrue(jwtProvider.validateToken(accessToken));
