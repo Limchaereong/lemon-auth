@@ -30,7 +30,6 @@ public class AuthService {
         String newAccessToken = jwtProvider.createAccessJwt(userId);
         String newRefreshToken = jwtProvider.createRefreshJwt();
 
-        // 새로 발급된 액세스 토큰과 리프레시 토큰을 응답으로 내려줌
         return ResponseEntity.ok(new TokenResponseDto(newAccessToken, newRefreshToken));
     }
 }
