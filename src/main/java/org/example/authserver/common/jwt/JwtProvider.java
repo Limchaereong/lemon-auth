@@ -39,11 +39,12 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String createRefreshJwt() {
+    public String createRefreshJwt(String userId) {
         return Jwts.builder()
                 .setHeaderParam("typ", "REFRESH_TOKEN")
                 .subject(UUID.randomUUID().toString())
                 .issuedAt(Date.from(Instant.now()))
+                .claim("userId", userId)
                 .setExpiration(Date.from(Instant.now().plusMillis(refreshTokenExpiration)))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();

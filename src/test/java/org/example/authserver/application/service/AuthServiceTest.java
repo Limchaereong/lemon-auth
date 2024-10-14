@@ -35,7 +35,7 @@ class AuthServiceTest {
         String expectedRefreshToken = "refresh_token";
 
         when(jwtProvider.createAccessJwt(userId)).thenReturn(expectedAccessToken);
-        when(jwtProvider.createRefreshJwt()).thenReturn(expectedRefreshToken);
+        when(jwtProvider.createRefreshJwt(userId)).thenReturn(expectedRefreshToken);
 
         // Act
         TokenResponseDto tokenResponseDto = authService.generateTokens(userId);
@@ -62,7 +62,7 @@ class AuthServiceTest {
         when(jwtProvider.isTokenValid(refreshToken)).thenReturn(true);
         when(jwtProvider.getAllClaimsFromToken(refreshToken)).thenReturn(claims);
         when(jwtProvider.createAccessJwt(userId)).thenReturn(newAccessToken);
-        when(jwtProvider.createRefreshJwt()).thenReturn(newRefreshToken);
+        when(jwtProvider.createRefreshJwt(userId)).thenReturn(newRefreshToken);
 
         // Act
         ResponseEntity<TokenResponseDto> responseEntity = authService.refreshAccessToken(refreshToken);
