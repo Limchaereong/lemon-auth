@@ -15,7 +15,7 @@ public class AuthService {
 
     public TokenResponseDto generateTokens(String userId) {
         String accessToken = jwtProvider.createAccessJwt(userId);
-        String refreshToken = jwtProvider.createRefreshJwt();
+        String refreshToken = jwtProvider.createRefreshJwt(userId);
         return new TokenResponseDto(accessToken, refreshToken);
     }
 
@@ -28,7 +28,7 @@ public class AuthService {
         String userId = claims.get("userId", String.class);
 
         String newAccessToken = jwtProvider.createAccessJwt(userId);
-        String newRefreshToken = jwtProvider.createRefreshJwt();
+        String newRefreshToken = jwtProvider.createRefreshJwt(userId);
 
         return ResponseEntity.ok(new TokenResponseDto(newAccessToken, newRefreshToken));
     }

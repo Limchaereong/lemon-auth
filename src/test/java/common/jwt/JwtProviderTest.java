@@ -37,18 +37,23 @@ class JwtProviderTest {
 
     @Test
     void testCreateRefreshJwt() {
-        String refreshToken = jwtProvider.createRefreshJwt();
+        String userId = "12345";
+
+        String refreshToken = jwtProvider.createRefreshJwt(userId); // userId 포함
         assertNotNull(refreshToken);
         System.out.println("Refresh Token: " + refreshToken);
 
         // 리프레시 토큰도 유효한지 확인
         assertTrue(jwtProvider.validateToken(refreshToken));
+
+        // 리프레시 토큰에서 클레임을 추출하여 검증
+        Claims claims = jwtProvider.getAllClaimsFromToken(refreshToken);
+        assertEquals(userId, claims.get("userId")); // userId가 포함되었는지 확인
     }
 
     @Test
     void testValidateToken() {
         String userId = "12345";
-        String userRole = "USER";
 
         String accessToken = jwtProvider.createAccessJwt(userId);
         assertNotNull(accessToken);
@@ -70,7 +75,6 @@ class JwtProviderTest {
     @Test
     void testTokenExpiration() throws InterruptedException {
         String userId = "12345";
-        String userRole = "USER";
 
         // 매우 짧은 유효 기간을 가진 토큰 생성
         jwtProvider.accessTokenExpiration = 1000; // 1초
