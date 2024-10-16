@@ -1,4 +1,4 @@
-package org.basoup.authserver.config;
+package org.basoup.authserver.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
