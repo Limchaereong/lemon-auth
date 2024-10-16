@@ -1,14 +1,14 @@
-package org.example.authserver.presentation.controller;
+package org.basoup.authserver.presentation.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.example.authserver.application.service.AuthService;
-import org.example.authserver.presentation.dto.request.TokenRequestDto;
-import org.example.authserver.presentation.dto.response.TokenResponseDto;
+
+import org.basoup.authserver.application.service.AuthService;
+import org.basoup.authserver.presentation.dto.request.TokenRequestDto;
+import org.basoup.authserver.presentation.dto.response.TokenResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

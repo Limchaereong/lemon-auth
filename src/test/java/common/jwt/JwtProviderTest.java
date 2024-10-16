@@ -1,7 +1,7 @@
 package common.jwt;
 
 import io.jsonwebtoken.Claims;
-import org.example.authserver.common.jwt.JwtProvider;
+import org.basoup.authserver.common.jwt.JwtProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

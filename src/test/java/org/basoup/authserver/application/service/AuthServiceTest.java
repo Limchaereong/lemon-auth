@@ -1,8 +1,9 @@
-package org.example.authserver.application.service;
+package org.basoup.authserver.application.service;
 
 import io.jsonwebtoken.Claims;
-import org.example.authserver.common.jwt.JwtProvider;
-import org.example.authserver.presentation.dto.response.TokenResponseDto;
+
+import org.basoup.authserver.common.jwt.JwtProvider;
+import org.basoup.authserver.presentation.dto.response.TokenResponseDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

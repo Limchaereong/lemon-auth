@@ -1,4 +1,4 @@
-package org.example.authserver.common.jwt;
+package org.basoup.authserver.common.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

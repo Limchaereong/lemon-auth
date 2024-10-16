@@ -1,9 +1,10 @@
-package org.example.authserver.application.service;
+package org.basoup.authserver.application.service;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-import org.example.authserver.common.jwt.JwtProvider;
-import org.example.authserver.presentation.dto.response.TokenResponseDto;
+
+import org.basoup.authserver.common.jwt.JwtProvider;
+import org.basoup.authserver.presentation.dto.response.TokenResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
